@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+
+  TwitterAuthParam:
+    Type: String
+    Default: TWITTER_AUTH
+
+Resources:
+
+  RandomLikesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: RandomLikesFunction
+      Handler: com.hs.randomlikes.App::handleRequest
+      Runtime: java8
+      MemorySize: 512
+      Timeout: 15
+      Environment:
+        Variables:
+          TWITTER_AUTH_PARAM: !Ref TwitterAuthParam
+      Policies:
+        - SSMParameterReadPolicy:
+            ParameterName: !Ref TwitterAuthParam
+      Events:
+        GetResource:
+          Type: HttpApi
+          Properties:
+            Method: get
+            Path: /u/{name}
+            ApiId: !Ref RandomLikesHttpApi
+
+  RandomLikesHttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      DefaultRouteSettings:
+        ThrottlingBurstLimit: 5
+        ThrottlingRateLimit: 20
+      CorsConfiguration:
+        AllowMethods:
+          - GET
+        AllowOrigins:
+          - "https://random-likes.harprit.dev"

@@ -1,0 +1,11 @@
+# Intellij
+/.idea
+/functions/RandomLikesFunction/randomlikes.iml
+
+# Maven
+functions/RandomLikesFunction/target/
+functions/RandomLikesFunction/dependency-reduced-pom.xml
+
+# AWS SAM
+functions/.aws-sam/
+functions/samconfig.toml
