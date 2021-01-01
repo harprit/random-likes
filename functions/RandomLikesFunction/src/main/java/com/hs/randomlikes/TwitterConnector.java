@@ -1,5 +1,6 @@
 package com.hs.randomlikes;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.http.apache.ApacheHttpClient;
 import software.amazon.awssdk.services.ssm.SsmClient;
@@ -10,17 +11,18 @@ import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class TwitterConnector {
 
-    private static org.slf4j.Logger LOG = LoggerFactory.getLogger(TwitterConnector.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TwitterConnector.class);
 
-    private static String ENV_VARIABLE_HOLDING_PARAMETER_NAME = "TWITTER_AUTH_PARAM";
-    private static String PARAMETER_NAME_DEFAULT = "TWITTER_AUTH";
+    private static final String ENV_VARIABLE_HOLDING_PARAMETER_NAME = "TWITTER_AUTH_PARAM";
+    private static final String PARAMETER_NAME_DEFAULT = "TWITTER_AUTH";
 
     public static Twitter getInstance() {
-        String[] parameters = getTwitterAuthParameters();
+        String[] parameters = Objects.requireNonNull(getTwitterAuthParameters());
 
         ConfigurationBuilder twitterConfigBuilder = new ConfigurationBuilder()
                 .setDebugEnabled(true)

@@ -5,24 +5,25 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.utils.Pair;
-import twitter4j.Twitter;
+
+import java.util.Objects;
 
 public class App {
 
-    private static Logger LOG = LoggerFactory.getLogger(App.class);
+    private static final Logger LOG = LoggerFactory.getLogger(App.class);
 
-    private final Twitter twitter;
+    private final RandomLikesFinder randomLikesFinder;
 
     public App() {
-        this.twitter = TwitterConnector.getInstance();
+        this.randomLikesFinder = new RandomLikesFinder();
     }
 
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent input) {
-        String username = input.getPathParameters().get("name");
+        String username = Objects.requireNonNull(input.getPathParameters().get("name"));
         LOG.info("Going to process for username: " + username);
 
 
-        Pair<Integer, String> pair = new RandomLikesFinder(twitter, username).find();
+        Pair<Integer, String> pair = randomLikesFinder.findFor(username);
         return new APIGatewayProxyResponseEvent().withStatusCode(pair.left()).withBody(pair.right());
     }
 }

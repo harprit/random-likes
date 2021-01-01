@@ -1,5 +1,6 @@
 package com.hs.randomlikes;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.utils.Pair;
 import twitter4j.*;
@@ -8,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomLikesFinder {
 
-    private static org.slf4j.Logger LOG = LoggerFactory.getLogger(RandomLikesFinder.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RandomLikesFinder.class);
 
     private static final int MAX_PAGE_NUM = 3_000;
 
@@ -16,14 +17,11 @@ public class RandomLikesFinder {
 
     private final Twitter twitter;
 
-    private final String username;
-
-    RandomLikesFinder(Twitter twitter, String username) {
-        this.twitter = twitter;
-        this.username = username;
+    RandomLikesFinder() {
+        this.twitter = TwitterConnector.getInstance();
     }
 
-    Pair<Integer, String> find() {
+    Pair<Integer, String> findFor(String username) {
         try {
             if (rateLimitExceeded()) {
                 return Pair.of(500, "Sorry, Twitter rate limit exceeded. Please try again later.");
@@ -65,11 +63,5 @@ public class RandomLikesFinder {
     // upperBound is exclusive
     private int getRandom(int upperBound) {
         return ThreadLocalRandom.current().nextInt(1, upperBound);
-    }
-
-    // testing
-    public static void main(String[] args) {
-        Pair<Integer, String> pair = new RandomLikesFinder(TwitterConnector.getInstance(), "harprits").find();
-        LOG.info(pair.left() + " " + pair.right());
     }
 }
