@@ -42,3 +42,8 @@ Resources:
           - GET
         AllowOrigins:
           - "https://random-likes.harprit.dev"
+
+Outputs:
+  ApiEndpointUrl:
+    Description: "API Gateway endpoint URL"
+    Value: !Sub "https://${RandomLikesHttpApi}.execute-api.${AWS::Region}.amazonaws.com/u/"
