@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 public class AppTest {
 
-    /**
+    /*
      * This is an integration test as it makes actual calls to AWS SSM Parameter Store and Twitter APIs.
      *
      * 1. AWS SSM Parameter Store is invoked for fetching Twitter APIs auth keys and tokens.
