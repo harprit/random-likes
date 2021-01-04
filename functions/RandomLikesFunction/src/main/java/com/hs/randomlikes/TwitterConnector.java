@@ -24,6 +24,8 @@ public class TwitterConnector {
     public static Twitter getInstance() {
         String[] parameters = Objects.requireNonNull(getTwitterAuthParameters());
 
+        LOG.info("Going to create new Twitter connection");
+
         ConfigurationBuilder twitterConfigBuilder = new ConfigurationBuilder()
                 .setDebugEnabled(true)
                 .setOAuthConsumerKey(parameters[0])

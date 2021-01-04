@@ -18,6 +18,7 @@ public class RandomLikesFinder {
     private final Twitter twitter;
 
     RandomLikesFinder() {
+        LOG.info("Creating App");
         this.twitter = TwitterConnector.getInstance();
     }
 
