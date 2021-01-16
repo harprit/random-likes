@@ -4,10 +4,10 @@ This project contains source code and supporting files for a serverless app buil
 
 It includes the following files and folders.
 
-- functions/RandomLikesFunction/src/main - Code for the application's Lambda function written in Java.
-- functions/RandomLikesFunction/src/test - Unit tests for the application code. 
-- functions/template.yaml - SAM template that defines the application's AWS resources.
-- public - Front end code in HTML, some CSS and vanilla JS. You may deploy the same on Netlify.
+- `functions/RandomLikesFunction/src/main` - Code for the application's Lambda function written in Java.
+- `functions/RandomLikesFunction/src/test` - Unit tests for the application code. 
+- `functions/template.yaml` - SAM template that defines the application's AWS resources.
+- `public` - Front end code in HTML, some CSS and vanilla JS. You may deploy the same on Netlify.
 
 ## Deploy the application on AWS
 
@@ -32,7 +32,7 @@ The first command will build the source of your application. The second command 
 * **Allow SAM CLI IAM role creation**: Many AWS SAM templates, including this example, create AWS IAM roles required for the AWS Lambda function(s) included to access AWS services. By default, these are scoped down to minimum required permissions. To deploy an AWS CloudFormation stack which creates or modified IAM roles, the `CAPABILITY_IAM` value for `capabilities` must be provided. If permission isn't provided through this prompt, to deploy this example you must explicitly pass `--capabilities CAPABILITY_IAM` to the `sam deploy` command.
 * **Save arguments to samconfig.toml**: If set to yes, your choices will be saved to a configuration file inside the project, so that in the future you can just re-run `sam deploy` without parameters to deploy changes to your application.
 
-You can find your API Gateway Endpoint URL in the output values displayed after deployment. Update the outputted URL in `public/index.js` file to invoke the same from UI so as to view the tweet in the browser.
+**You will find the API Gateway Endpoint URL in the output values displayed after deployment. Update the outputted URL in `public/index.js` file to invoke the same from UI so as to view the tweet in the browser.**
 
 ## Use the SAM CLI to build and test locally
 
