@@ -6,6 +6,7 @@ It includes the following files and folders.
 
 - `functions/RandomLikesFunction/src/main` - Code for the application's Lambda function written in Java.
 - `functions/RandomLikesFunction/src/test` - Unit tests for the application code. 
+- `functions/RandomLikesFunction/pom.xml` - Maven file defining all the required dependencies and configured to a build an uberjar for deployment.
 - `functions/template.yaml` - SAM template that defines the application's AWS resources.
 - `public` - Front end code in HTML, some CSS and vanilla JS. You may deploy the same on Netlify.
 
